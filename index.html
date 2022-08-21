@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <title>ARAM Draft Simulator</title>
+    </head>
+    <body>
+        <div class="px-4 py-5 text-center">
+            <h1 class="display-6 fw-bold">ARAM Draft Simulator</h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="lead mb-4">Stop picking bad champs, learn how to draft.</p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button class="btn btn-primary btn-lg px-4 gap-3" onclick="simulateDraft()">Simulate Draft</button>
+              </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-2 h3 fw-bold">Blue Team Bench</div>
+                <div class="col-md-2 offset-md-1 h3 fw-bold">Blue Team</div>
+                <div class="col-md-2 offset-md-2 h3 fw-bold">Red Team</div>
+                <div class="col-md-2 offset-md-1 h3 fw-bold">Red Team Bench</div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><input type="checkbox" id="bench1" onchange="aramSelect('bench1', 'blueBench1')">
+                    <label for="bench1"><img alt="" src="icons/blank.png" id="blueBench1" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench2" onchange="aramSelect('bench2', 'blueBench2')">
+                    <label for="bench2"><img alt="" src="icons/blank.png" id="blueBench2" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-1"><button class="btn btn-secondary" id="rollBlue1" onclick="rollBlue(rollBlue1, blue1)">Roll</button>
+                    <input type="checkbox" id="active1" onchange="aramSelect('active1', 'blue1')"><label for="active1">
+                    <img alt="" src="icons/blank.png" id="blue1" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-2"><input type="checkbox" id="active6" onchange="aramSelect('active6', 'red1')">
+                    <label for="active6"><img alt="" src="icons/blank.png" id="red1" width="80" height="80"></label>
+                    <button class="btn btn-secondary" id="rollRed1" onclick="rollRed(rollRed1, red1)">Roll</button></div>
+                <div class="col-md-1 offset-md-1"><input type="checkbox" id="bench11" onchange="aramSelect('bench11', 'redBench1')">
+                    <label for="bench11"><img alt="" src="icons/blank.png" id="redBench1" class="redBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench12" onchange="aramSelect('bench12', 'redBench2')">
+                    <label for="bench12"><img alt="" src="icons/blank.png" id="redBench2" class="redBench" width="80" height="80"></label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><input type="checkbox" id="bench3" onchange="aramSelect('bench3', 'blueBench3')">
+                    <label for="bench3"><img alt="" src="icons/blank.png" id="blueBench3" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench4" onchange="aramSelect('bench4', 'blueBench4')">
+                    <label for="bench4"><img alt="" src="icons/blank.png" id="blueBench4" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-1"><button class="btn btn-secondary" id="rollBlue2" onclick="rollBlue(rollBlue2, blue2)">Roll</button>
+                    <input type="checkbox" id="active2" onchange="aramSelect('active2', 'blue2')"><label for="active2">
+                    <img alt="" src="icons/blank.png" id="blue2" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-2"><input type="checkbox" id="active7" onchange="aramSelect('active7', 'red2')">
+                    <label for="active7"><img alt="" src="icons/blank.png" id="red2" width="80" height="80"></label>
+                    <button class="btn btn-secondary" id="rollRed2" onclick="rollRed(rollRed2, red2)">Roll</button></div>
+                <div class="col-md-1 offset-md-1"><input type="checkbox" id="bench13" onchange="aramSelect('bench13', 'redBench3')">
+                    <label for="bench13"><img alt="" src="icons/blank.png" id="redBench3" class="redBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench14" onchange="aramSelect('bench14', 'redBench4')">
+                    <label for="bench14"><img alt="" src="icons/blank.png" id="redBench4" class="redBench" width="80" height="80"></label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><input type="checkbox" id="bench5" onchange="aramSelect('bench5', 'blueBench5')">
+                    <label for="bench5"><img alt="" src="icons/blank.png" id="blueBench5" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench6" onchange="aramSelect('bench6', 'blueBench6')">
+                    <label for="bench6"><img alt="" src="icons/blank.png" id="blueBench6" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-1"><button class="btn btn-secondary" id="rollBlue3" onclick="rollBlue(rollBlue3, blue3)">Roll</button>
+                    <input type="checkbox" id="active3" onchange="aramSelect('active3', 'blue3')"><label for="active3">
+                    <img alt="" src="icons/blank.png" id="blue3" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-2"><input type="checkbox" id="active8" onchange="aramSelect('active8', 'red3')">
+                    <label for="active8"><img alt="" src="icons/blank.png" id="red3" width="80" height="80"></label>
+                    <button class="btn btn-secondary" id="rollRed3" onclick="rollRed(rollRed3, red3)">Roll</button></div>
+                <div class="col-md-1 offset-md-1"><input type="checkbox" id="bench15" onchange="aramSelect('bench15', 'redBench5')">
+                    <label for="bench15"><img alt="" src="icons/blank.png" id="redBench5" class="redBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench16" onchange="aramSelect('bench16', 'redBench6')">
+                    <label for="bench16"><img alt="" src="icons/blank.png" id="redBench6" class="redBench" width="80" height="80"></label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><input type="checkbox" id="bench7" onchange="aramSelect('bench7', 'blueBench7')">
+                    <label for="bench7"><img alt="" src="icons/blank.png" id="blueBench7" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench8" onchange="aramSelect('bench8', 'blueBench8')">
+                    <label for="bench8"><img alt="" src="icons/blank.png" id="blueBench8" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-1"><button class="btn btn-secondary" id="rollBlue4" onclick="rollBlue(rollBlue4, blue4)">Roll</button>
+                    <input type="checkbox" id="active4" onchange="aramSelect('active4', 'blue4')"><label for="active4">
+                    <img alt="" src="icons/blank.png" id="blue4" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-2"><input type="checkbox" id="active9" onchange="aramSelect('active9', 'red4')">
+                    <label for="active9"><img alt="" src="icons/blank.png" id="red4" width="80" height="80"></label>
+                    <button class="btn btn-secondary" id="rollRed4" onclick="rollRed(rollRed4, red4)">Roll</button></div>
+                <div class="col-md-1 offset-md-1"><input type="checkbox" id="bench17" onchange="aramSelect('bench17', 'redBench7')">
+                    <label for="bench17"><img alt="" src="icons/blank.png" id="redBench7" class="redBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench18" onchange="aramSelect('bench18', 'redBench8')">
+                    <label for="bench18"><img alt="" src="icons/blank.png" id="redBench8" class="redBench" width="80" height="80"></label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><input type="checkbox" id="bench9" onchange="aramSelect('bench9', 'blueBench9')">
+                    <label for="bench9"><img alt="" src="icons/blank.png" id="blueBench9" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench10" onchange="aramSelect('bench10', 'blueBench10')">
+                    <label for="bench10"><img alt="" src="icons/blank.png" id="blueBench10" class="blueBench" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-1"><button class="btn btn-secondary" id="rollBlue5" onclick="rollBlue(rollBlue5, blue5)">Roll</button>
+                    <input type="checkbox" id="active5" onchange="aramSelect('active5', 'blue5')"><label for="active5">
+                    <img alt="" src="icons/blank.png" id="blue5" width="80" height="80"></label></div>
+                <div class="col-md-2 offset-md-2"><input type="checkbox" id="active10" onchange="aramSelect('active10', 'red5')">
+                    <label for="active10"><img alt="" src="icons/blank.png" id="red5" width="80" height="80"></label>
+                    <button class="btn btn-secondary" id="rollRed5" onclick="rollRed(rollRed5, red5)">Roll</button></div>
+                <div class="col-md-1 offset-md-1"><input type="checkbox" id="bench19" onchange="aramSelect('bench19', 'redBench9')">
+                    <label for="bench19"><img alt="" src="icons/blank.png" id="redBench9" class="redBench" width="80" height="80"></label></div>
+                <div class="col-md-1"><input type="checkbox" id="bench20" onchange="aramSelect('bench20', 'redBench10')">
+                    <label for="bench20"><img alt="" src="icons/blank.png" id="redBench10" class="redBench" width="80" height="80"></label></div>
+            </div>
+        </div>
+        <script>
+            const allChampions = ['icons/AatroxSquare.png', 'icons/AhriSquare.png', 'icons/AkaliSquare.png', 'icons/AlistarSquare.png', 'icons/AmumuSquare.png',
+            'icons/AniviaSquare.png', 'icons/AnnieSquare.png', 'icons/ApheliosSquare.png', 'icons/AsheSquare.png', 'icons/Aurelion_SolSquare.png',
+            'icons/AzirSquare.png', 'icons/BardSquare.png', 'icons/BlitzcrankSquare.png', 'icons/BrandSquare.png', 'icons/BraumSquare.png',
+            'icons/CaitlynSquare.png', 'icons/CamilleSquare.png', 'icons/CassiopeiaSquare.png', 'icons/ChoGathSquare.png', 'icons/CorkiSquare.png',
+            'icons/DariusSquare.png', 'icons/DianaSquare.png', 'icons/DrMundoSquare.png', 'icons/DravenSquare.png', 'icons/EkkoSquare.png', 'icons/EliseSquare.png',
+            'icons/EvelynnSquare.png', 'icons/EzrealSquare.png', 'icons/FiddlesticksSquare.png', 'icons/FioraSquare.png', 'icons/FizzSquare.png', 'icons/GalioSquare.png',
+            'icons/GangplankSquare.png', 'icons/GarenSquare.png', 'icons/GnarSquare.png', 'icons/GragasSquare.png', 'icons/GravesSquare.png', 'icons/HecarimSquare.png',
+            'icons/HeimerdingerSquare.png', 'icons/IllaoiSquare.png', 'icons/IreliaSquare.png', 'icons/IvernSquare.png', 'icons/JannaSquare.png', 'icons/JarvanSquare.png',
+            'icons/JaxSquare.png', 'icons/JayceSquare.png', 'icons/JhinSquare.png', 'icons/JinxSquare.png', 'icons/KaiSaSquare.png', 'icons/KalistaSquare.png',
+            'icons/KarmaSquare.png', 'icons/KarthusSquare.png', 'icons/KassadinSquare.png', 'icons/KatarinaSquare.png', 'icons/KayleSquare.png', 'icons/KaynSquare.png',
+            'icons/KennenSquare.png', 'icons/KhaZixSquare.png', 'icons/KindredSquare.png', 'icons/KledSquare.png', 'icons/KogMawSquare.png', 'icons/LeBlancSquare.png',
+            'icons/Lee_SinSquare.png', 'icons/LeonaSquare.png', 'icons/LilliaSquare.png', 'icons/LissandraSquare.png', 'icons/LucianSquare.png', 'icons/LuluSquare.png',
+            'icons/LuxSquare.png', 'icons/MalphiteSquare.png', 'icons/MalzaharSquare.png', 'icons/MaokaiSquare.png', 'icons/Master_YiSquare.png', 'icons/MissFortuneSquare.png',
+            'icons/MordekaiserSquare.png', 'icons/MorganaSquare.png', 'icons/NamiSquare.png', 'icons/NasusSquare.png', 'icons/NautilusSquare.png', 'icons/NeekoSquare.png',
+            'icons/NidaleeSquare.png', 'icons/NocturneSquare.png', 'icons/NunuSquare.png', 'icons/OlafSquare.png', 'icons/OriannaSquare.png', 'icons/OrnnSquare.png',
+            'icons/PantheonSquare.png', 'icons/PoppySquare.png', 'icons/PykeSquare.png', 'icons/QiyanaSquare.png', 'icons/QuinnSquare.png', 'icons/RakanSquare.png',
+            'icons/RammusSquare.png', 'icons/RekSaiSquare.png', 'icons/Rell.png', 'icons/RenektonSquare.png', 'icons/RengarSquare.png', 'icons/RivenSquare.png',
+            'icons/RumbleSquare.png', 'icons/RyzeSquare.png', 'icons/SamiraSquare.png', 'icons/SejuaniSquare.png', 'icons/SennaSquare.png', 'icons/SeraphineSquare.png',
+            'icons/SettSquare.png', 'icons/ShacoSquare.png', 'icons/ShenSquare.png', 'icons/ShyvanaSquare.png', 'icons/SingedSquare.png', 'icons/SionSquare.png',
+            'icons/SivirSquare.png', 'icons/SkarnerSquare.png', 'icons/SonaSquare.png', 'icons/SorakaSquare.png', 'icons/SwainSquare.png', 'icons/SylasSquare.png',
+            'icons/SyndraSquare.png', 'icons/Tahm_KenchSquare.png', 'icons/TaliyahSquare.png', 'icons/TalonSquare.png', 'icons/TaricSquare.png', 'icons/TeemoSquare.png',
+            'icons/ThreshSquare.png', 'icons/TristanaSquare.png', 'icons/TrundleSquare.png', 'icons/TryndamereSquare.png', 'icons/Twisted_FateSquare.png', 'icons/TwitchSquare.png',
+            'icons/UdyrSquare.png', 'icons/UrgotSquare.png', 'icons/VarusSquare.png', 'icons/VayneSquare.png', 'icons/VeigarSquare.png', 'icons/VelKozSquare.png',
+            'icons/ViSquare.png', 'icons/ViktorSquare.png', 'icons/VladimirSquare.png', 'icons/VolibearSquare.png', 'icons/WarwickSquare.png', 'icons/WukongSquare.png',
+            'icons/XayahSquare.png', 'icons/XerathSquare.png', 'icons/Xin_ZhaoSquare.png', 'icons/YasuoSquare.png', 'icons/YoneSquare.png', 'icons/YorickSquare.png',
+            'icons/YuumiSquare.png', 'icons/ZacSquare.png', 'icons/ZedSquare.png', 'icons/ZiggsSquare.png', 'icons/ZileanSquare.png', 'icons/ZoeSquare.png',
+            'icons/ZyraSquare.png', 'icons/ViegoSquare.png', 'icons/GwenSquare.png', 'icons/AkshanSquare.png', 'icons/VexSquare.png', 'icons/RenataGlascSquare.png',
+            'icons/ZeriSquare.png', 'icons/BelVethSquare.png'];
+
+            const reserveChampions = [];
+
+            let blue1 = document.querySelector("#blue1");
+            let blue2 = document.querySelector("#blue2");
+            let blue3 = document.querySelector("#blue3");
+            let blue4 = document.querySelector("#blue4");
+            let blue5 = document.querySelector("#blue5");
+            let red1 = document.querySelector("#red1");
+            let red2 = document.querySelector("#red2");
+            let red3 = document.querySelector("#red3");
+            let red4 = document.querySelector("#red4");
+            let red5 = document.querySelector("#red5");
+            let rollButtonBlue1 = document.querySelector("#rollBlue1");
+            let rollButtonBlue2 = document.querySelector("#rollBlue2");
+            let rollButtonBlue3 = document.querySelector("#rollBlue3");
+            let rollButtonBlue4 = document.querySelector("#rollBlue4");
+            let rollButtonBlue5 = document.querySelector("#rollBlue5");
+            let rollButtonRed1 = document.querySelector("#rollRed1");
+            let rollButtonRed2 = document.querySelector("#rollRed2");
+            let rollButtonRed3 = document.querySelector("#rollRed3");
+            let rollButtonRed4 = document.querySelector("#rollRed4");
+            let rollButtonRed5 = document.querySelector("#rollRed5");
+            let blueBench = document.querySelectorAll(".blueBench");
+            let redBench = document.querySelectorAll(".redBench");
+
+            const initialChampions = [blue1, blue2, blue3, blue4, blue5, red1, red2, red3, red4, red5];
+            const rollButtons = [rollButtonBlue1, rollButtonBlue2, rollButtonBlue3, rollButtonBlue4, rollButtonBlue5,
+                                rollButtonRed1, rollButtonRed2, rollButtonRed3, rollButtonRed4, rollButtonRed5];
+
+            // Simulate function: reset everything, pick 30 random champs, first 10 are shown, other 20 go to reserve for when roll function is called
+            function simulateDraft(){
+                const randomChampions = [...allChampions].sort(() => 0.5 - Math.random());
+                const chosenChampions = randomChampions.slice(0, 30);
+
+                for (let i = 0; i < rollButtons.length; i++) {
+                    initialChampions[i].src = chosenChampions[chosenChampions.length - 1];
+                    chosenChampions.pop();
+                }
+
+                for (let i = 0; i < rollButtons.length; i++) {
+                    rollButtons[i].innerHTML = "Roll(2)";
+                    rollButtons[i].removeAttribute("disabled");
+                }
+
+                for (let i = 0; i < blueBench.length; i++) {
+                    blueBench[i].src = "icons/blank.png";
+                }
+                for (let i = 0; i < redBench.length; i++) {
+                    redBench[i].src = "icons/blank.png";
+                }
+
+                for (let i = 0; i < chosenChampions.length; i++) {
+                    reserveChampions.push(chosenChampions[i]);
+                }
+
+                selected = [];
+                counter = 0;
+                for (let i = 0; i < selectedButtons.length; i++) {
+                        selectedButtons[i].checked = false;
+                    }
+            }
+
+            // Roll function: put the picked champion on to the bench and get a new one from the reserve list
+            // For blue team
+            function rollBlue(button, champ) {
+                if(button.innerHTML == "Roll") {
+                    alert("Simulate a draft first.");
+                    return;
+                }
+
+                if (button.innerHTML == "Roll(2)") {
+                    button.innerHTML = "Roll(1)";
+                } else if (button.innerHTML == "Roll(1)") {
+                    button.innerHTML = "Roll(0)";
+                    button.setAttribute("disabled", "");
+                }
+
+                for (let i = 0; i < blueBench.length; i++) {
+                    if (String(blueBench[i].src).includes("/icons/blank.png")) {
+                        blueBench[i].src = champ.src;
+                        break;
+                    }
+                }
+
+                champ.src = reserveChampions[reserveChampions.length - 1];
+                reserveChampions.pop();
+            }
+
+            // For red
+            function rollRed(button, champ) {
+                if(button.innerHTML == "Roll") {
+                    alert("Simulate a draft first.");
+                    return;
+                }
+
+                if (button.innerHTML == "Roll(2)") {
+                    button.innerHTML = "Roll(1)";
+                } else if (button.innerHTML == "Roll(1)") {
+                    button.innerHTML = "Roll(0)";
+                    button.setAttribute("disabled", "");
+                }
+
+                for (let i = 0; i < redBench.length; i++) {
+                    if (String(redBench[i].src).includes("/icons/blank.png")) {
+                        redBench[i].src = champ.src;
+                        break;
+                    }
+                }
+
+                champ.src = reserveChampions[reserveChampions.length - 1];
+                reserveChampions.pop();
+            }
+
+            // Select function: Store selected items and swap once there are 2 selected
+            let counter = 0;
+            var selected = [];
+            var selectedButtons = [];
+
+            function aramSelect(button, champ) {
+                // If checked, add to storage. If unchecked, remove from storage
+                if (document.getElementById(button).checked) {
+                    selected.push(document.getElementById(champ));
+                    selectedButtons.push(document.getElementById(button))
+                    counter ++;
+                } else {
+                    selected.pop();
+                    selectedButtons.pop()
+                    counter --;
+                }
+
+                if (counter == 2) {
+                    aramSwap();
+                }
+            }
+
+            // Swap function: swap icons of selected champions if they are on the same team. Reset selection if swap is invalid.
+            function aramSwap() {
+                // Check if one selected item is blank or if the items don't belong to the same team
+                if(String(selected[0].src).includes("/icons/blank.png") || String(selected[1].src).includes("/icons/blank.png")) {
+                    alert("Pick 2 Champions.");
+
+                    selected = [];
+                    counter = 0;
+                    for (let i = 0; i < selectedButtons.length; i++) {
+                        selectedButtons[i].checked = false;
+                    }
+
+                    return;
+                } else if (String(selected[0].id).includes("blue") && String(selected[1].id).includes("red")) {
+                    alert("You can only swap Champions from the same team.");
+
+                    selected = [];
+                    counter = 0;
+                    for (let i = 0; i < selectedButtons.length; i++) {
+                        selectedButtons[i].checked = false;
+                    }
+
+                    return;
+                } else if (String(selected[0].id).includes("red") && String(selected[1].id).includes("blue")) {
+                    alert("You can only swap Champions from the same team.");
+
+                    selected = [];
+                    counter = 0;
+                    for (let i = 0; i < selectedButtons.length; i++) {
+                        selectedButtons[i].checked = false;
+                    }
+
+                    return;
+                }
+
+                // Swap the icons
+                let tempChamp = selected[0].src;
+                selected[0].src = selected[1].src;
+                selected[1].src = tempChamp;
+                selected = [];
+                counter = 0;
+
+                for (let i = 0; i < selectedButtons.length; i++) {
+                    selectedButtons[i].checked = false;
+                }
+            }
+        </script>
+    </body>
+</html>
